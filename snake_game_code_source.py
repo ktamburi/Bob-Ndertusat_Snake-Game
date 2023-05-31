@@ -149,7 +149,7 @@ wn.onkeypress(go_right,"Right")
 
 while True:
     wn.update()
-    
+    border_collision()
     food_collision()
     bodymove()
     move()
