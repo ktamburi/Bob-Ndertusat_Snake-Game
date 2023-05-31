@@ -1,6 +1,7 @@
 import turtle
 import tkinter as TK
 import time
+import random
 
 #window setup
 wn=turtle.Screen() 
@@ -32,6 +33,15 @@ for index in range(1,4,+1):
     body_part.goto(head.xcor()-(20*index),0) 
     body.append(body_part) 
     
+#snake food
+apple=turtle.Turtle()
+apple.speed(0)  
+apple.color("red") 
+apple.shape("triangle")
+apple.shapesize(0.8) 
+apple.penup()    
+apple.goto(80,0)  
+
 #function to grow snake each time it feeds
 def newbody():
     new_body_part=turtle.Turtle()
@@ -41,7 +51,7 @@ def newbody():
     new_body_part.penup()
     body.append(new_body_part) 
     
-#function to update the movement of snake body
+#function to update the movement of body
 def bodymove():
     if head.direction=="left" or head.direction=="right" or head.direction=="up" or head.direction=="down":
         for index in range(len(body)-1,-1,-1):
@@ -82,6 +92,18 @@ def move():
         head.setx(head.xcor()-20) 
     if head.direction=="right": 
         head.setx(head.xcor()+20) 
+        
+#defining function for food collision
+def food_collision():
+    if head.distance(apple)<18:
+        x=random.randint(-335,335)
+        y=random.randint(-310,310)  
+        apple.goto(x,y)
+        newbody()
+
+        #function call to increase score for added body part
+        
+
 
 #keyboard bindings
 wn.listen()
@@ -101,6 +123,7 @@ wn.onkeypress(go_right,"Right")
 while True:
     wn.update()
     
+    food_collision()
     bodymove()
     move()
     
