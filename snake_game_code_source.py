@@ -132,6 +132,17 @@ def food_collision():
         newbody()
         update_score()   
         
+#define function for body collision
+def body_collision():
+    for segment in body: 
+        if head.distance(segment)<20:
+            global game
+            game=False
+            head.direction="stop" 
+            pen.penup() 
+            pen.goto(0,0)
+            pen.write("GAME OVER! Press 'R' to restart.", align="center", font=("Courier",12,"normal")) 
+        
 #defining function to set the snake to its initial conditions after game over
 def restart(): 
     global game
@@ -156,7 +167,6 @@ def restart():
     pen.goto(0,305)
     pen.write("Score: {}  High Score: {}".format(score,high_score),align="center", font=("Courier",12,"normal"))
 
-
 #keyboard bindings
 wn.listen()
 wn.onkeypress(go_up,"W")
@@ -180,5 +190,5 @@ while True:
     food_collision()
     bodymove()
     move()
-    
+    body_collision()
     time.sleep(0.08)
