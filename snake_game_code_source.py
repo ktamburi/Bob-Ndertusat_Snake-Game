@@ -141,8 +141,18 @@ def restart():
     pen.clear() 
     pen.goto(0,305)
     pen.write("Score: {}  High Score: {}".format(score,high_score),align="center", font=("Courier",12,"normal"))
-    #insert head food and body to its initial state
-    
+    #delete the old body parts
+    head.direction="stop"
+    head.goto(0,0) 
+    for index in range(1,4,+1):
+        body_part=turtle.Turtle()
+        body_part.speed(0)
+        body_part.shape("circle")
+        body_part.color('#383fff')
+        body_part.penup()
+        body_part.goto(0-(20*index),0)
+        body.append(body_part)  
+    apple.goto(80,0) 
 
 #keyboard bindings
 wn.listen()
