@@ -1,5 +1,6 @@
 import turtle
 import tkinter as TK
+import time
 
 #window setup
 wn=turtle.Screen() 
@@ -64,3 +65,11 @@ wn.onkeypress(go_left,"Left")
 wn.onkeypress(go_right,"D")
 wn.onkeypress(go_right,"d")
 wn.onkeypress(go_right,"Right")
+
+while True:
+    wn.update()
+    
+    
+    move()
+    
+    time.sleep(0.08)
