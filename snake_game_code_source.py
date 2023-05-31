@@ -21,6 +21,38 @@ head.penup()
 head.goto(0,0)  
 head.direction="stop" 
 
+#snake initial body setup
+body = [] 
+for index in range(1,4,+1): 
+    body_part=turtle.Turtle() 
+    body_part.speed(0) 
+    body_part.shape("circle") 
+    body_part.color('#383fff') 
+    body_part.penup() 
+    body_part.goto(head.xcor()-(20*index),0) 
+    body.append(body_part) 
+    
+#function to grow snake each time it feeds
+def newbody():
+    new_body_part=turtle.Turtle()
+    new_body_part.speed(0)
+    new_body_part.shape("circle")
+    new_body_part.color('#383fff')
+    new_body_part.penup()
+    body.append(new_body_part) 
+    
+#function to update the movement of snake body
+def bodymove():
+    if head.direction=="left" or head.direction=="right" or head.direction=="up" or head.direction=="down":
+        for index in range(len(body)-1,-1,-1):
+            x=body[index-1].xcor()
+            y=body[index-1].ycor()
+            body[index].goto(x,y)        
+            if index==0:
+                x=head.xcor()
+                y=head.ycor()
+                body[0].goto(x,y)
+
 #functions to update the movement of the snake
 game=True 
 def go_up():
@@ -69,7 +101,7 @@ wn.onkeypress(go_right,"Right")
 while True:
     wn.update()
     
-    
+    bodymove()
     move()
     
     time.sleep(0.08)
