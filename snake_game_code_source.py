@@ -12,6 +12,26 @@ wn.title("Snake Game by Bob Ndertusat")
 wn.bgcolor('#60D164') 
 wn.tracer(0) 
 
+#Pen and scores
+score=0 
+high_score=0 
+pen=turtle.Turtle() 
+pen.shape=("square") 
+pen.penup() 
+pen.hideturtle() 
+pen.goto(0,305) 
+pen.write("Score: {}  High Score: {}".format(score,high_score),align="center", font=("Courier",12,"normal")) 
+
+#def function to update score
+def update_score():
+    global score 
+    global high_score
+    score+=1
+    if score>high_score:
+        high_score=score
+    pen.clear() 
+    pen.write("Score: {}  High Score: {}".format(score,high_score),align="center", font=("Courier",12,"normal")) 
+
 #snake head setup
 head=turtle.Turtle() 
 head.speed(0)   
@@ -100,10 +120,7 @@ def food_collision():
         y=random.randint(-310,310)  
         apple.goto(x,y)
         newbody()
-
-        #function call to increase score for added body part
-        
-
+        update_score()   
 
 #keyboard bindings
 wn.listen()
