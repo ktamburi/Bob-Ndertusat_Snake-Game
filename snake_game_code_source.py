@@ -113,6 +113,16 @@ def move():
     if head.direction=="right": 
         head.setx(head.xcor()+20) 
         
+#defining function for border collision
+def border_collision():
+    if head.xcor()>330 or head.xcor()<-330 or head.ycor()>305 or head.ycor()<-305:
+        global game
+        game=False
+        head.direction="stop" 
+        pen.penup() 
+        pen.goto(0,0)
+        pen.write("GAME OVER! Press 'R' to restart.", align="center", font=("Courier",12,"normal"))
+        
 #defining function for food collision
 def food_collision():
     if head.distance(apple)<18:
