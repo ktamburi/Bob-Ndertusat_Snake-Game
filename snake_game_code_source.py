@@ -138,10 +138,9 @@ def restart():
     game=True
     global score
     score=0 
-    pen.clear() 
-    pen.goto(0,305)
-    pen.write("Score: {}  High Score: {}".format(score,high_score),align="center", font=("Courier",12,"normal"))
-    #delete the old body parts
+    for index in range(len(body)-1,-1,-1):
+        body[index].hideturtle() 
+    body.clear() 
     head.direction="stop"
     head.goto(0,0) 
     for index in range(1,4,+1):
@@ -153,6 +152,10 @@ def restart():
         body_part.goto(0-(20*index),0)
         body.append(body_part)  
     apple.goto(80,0) 
+    pen.clear() 
+    pen.goto(0,305)
+    pen.write("Score: {}  High Score: {}".format(score,high_score),align="center", font=("Courier",12,"normal"))
+
 
 #keyboard bindings
 wn.listen()
@@ -168,6 +171,8 @@ wn.onkeypress(go_left,"Left")
 wn.onkeypress(go_right,"D")
 wn.onkeypress(go_right,"d")
 wn.onkeypress(go_right,"Right")
+wn.onkeypress(restart,"R")
+wn.onkeypress(restart,"r")
 
 while True:
     wn.update()
