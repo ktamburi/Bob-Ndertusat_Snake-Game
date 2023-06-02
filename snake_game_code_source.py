@@ -22,6 +22,14 @@ pen.hideturtle()
 pen.goto(0,305) 
 pen.write("Score: {}  High Score: {}".format(score,high_score),align="center", font=("Courier",12,"normal")) 
 
+#function to speed up the snake
+n=0.14
+def speed():
+    global n
+    global score
+    if ((score%5)==0 and n>0.05):
+        n-=0.01
+
 #def function to update score
 def update_score():
     global score 
@@ -31,6 +39,7 @@ def update_score():
         high_score=score
     pen.clear() 
     pen.write("Score: {}  High Score: {}".format(score,high_score),align="center", font=("Courier",12,"normal")) 
+    speed()
 
 #snake head setup
 head=turtle.Turtle() 
@@ -191,4 +200,4 @@ while True:
     bodymove()
     move()
     body_collision()
-    time.sleep(0.08)
+    time.sleep(n)
