@@ -158,6 +158,8 @@ def restart():
     game=True
     global score
     score=0 
+    global n
+    n=0.14
     for index in range(len(body)-1,-1,-1):
         body[index].hideturtle() 
     body.clear() 
